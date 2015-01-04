@@ -3,9 +3,14 @@ var express 	= require('express'),
 	port		= process.env.PORT || 3000,
 	bodyParser	= require('body-parser'),
 	mongoose  	= require('mongoose'),
+	mongodbUri 	= require('mongodb-uri'),
 	database 	= require('./config/database');
 
-mongoose.connect(database.url);
+var uri = 'mongodb://heroku_app32997852:ca4atm9kjr50gg6i398o8habmo@ds029801.mongolab.com:29801/heroku_app32997852';
+
+var mongooseConnectString = mongodbUri.formatMongoose(uri);
+mongoose.connect(mongooseConnectString);
+// mongoose.connect(database.url);
 
 //Test for connection success
 var db = mongoose.connection;
